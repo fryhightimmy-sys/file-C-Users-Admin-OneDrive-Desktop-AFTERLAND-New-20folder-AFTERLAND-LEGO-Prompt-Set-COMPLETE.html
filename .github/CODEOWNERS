@@ -1,0 +1,31 @@
+# AFTERLAND Code Ownership
+
+* @fryhightimmy-sys
+
+# Apps
+/apps/web-fan/ @fryhightimmy-sys
+/apps/web-ops/ @fryhightimmy-sys
+/apps/api-core/ @fryhightimmy-sys
+/apps/api-nfc/ @fryhightimmy-sys
+/apps/api-ticketing/ @fryhightimmy-sys
+
+# Packages
+/packages/contracts/ @fryhightimmy-sys
+/packages/ui/ @fryhightimmy-sys
+/packages/db/ @fryhightimmy-sys
+/packages/config/ @fryhightimmy-sys
+/packages/events/ @fryhightimmy-sys
+/packages/telemetry/ @fryhightimmy-sys
+
+# Infrastructure
+/infra/ @fryhightimmy-sys
+
+# CI/CD
+.github/workflows/ @fryhightimmy-sys
+
+# Root configs
+/.github/CODEOWNERS @fryhightimmy-sys
+/package.json @fryhightimmy-sys
+/tsconfig.json @fryhightimmy-sys
+/biome.json @fryhightimmy-sys
+/turbo.json @fryhightimmy-sys
