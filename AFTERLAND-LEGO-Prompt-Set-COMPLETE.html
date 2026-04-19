@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AFTERLAND — LEGO Prompt Set (COMPLETE)</title>
+<style>
+  :root {
+    --bg: #0f1220;
+    --bg-2: #171a2e;
+    --card: #1e2240;
+    --card-hover: #262a4d;
+    --accent: #ffcc00;
+    --accent-2: #ff3b3b;
+    --accent-3: #00c2ff;
+    --text: #e9ecf8;
+    --muted: #9aa1c2;
+    --border: #2c3160;
+    --success: #3ddc97;
+    --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: radial-gradient(1200px 700px at 10% -10%, #1c2250 0%, transparent 60%),
+                radial-gradient(1000px 600px at 110% 10%, #2a1650 0%, transparent 55%),
+                var(--bg);
+    color: var(--text);
+    font-family: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+  }
+  header {
+    padding: 48px 24px 24px;
+    text-align: center;
+    position: relative;
+  }
+  .brick-row {
+    display: flex; justify-content: center; gap: 6px; margin-bottom: 16px;
+  }
+  .brick {
+    width: 28px; height: 18px; border-radius: 4px;
+    box-shadow: inset 0 -4px 0 rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.4);
+    position: relative;
+  }
+  .brick::before, .brick::after {
+    content: ""; position: absolute; top: -5px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: inherit;
+    box-shadow: inset 0 -2px 0 rgba(0,0,0,0.25);
+  }
+  .brick::before { left: 5px; }
+  .brick::after  { right: 5px; }
+  .b1 { background: var(--accent-2); }
+  .b2 { background: var(--accent); }
+  .b3 { background: var(--accent-3); }
+  .b4 { background: var(--success); }
+  .b5 { background: #b66dff; }
+
+  h1 {
+    font-size: clamp(28px, 4vw, 44px);
+    letter-spacing: 2px;
+    margin: 0 0 8px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 50%, var(--accent-3) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  header p.subtitle {
+    margin: 0 auto; max-width: 720px;
+    color: var(--muted); font-size: 15px;
+  }
+
+  main {
+    max-width: 1200px; margin: 0 auto;
+    padding: 16px 24px 80px;
+  }
+
+  .toolbar {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    align-items: center; justify-content: space-between;
+    margin: 24px 0 20px;
+    padding: 12px 14px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .toolbar input[type="search"] {
+    flex: 1 1 260px;
+    background: #12152b;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    transition: border .15s ease;
+  }
+  .toolbar input[type="search"]:focus { border-color: var(--accent-3); }
+
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    border: 1px solid var(--border);
+    background: #12152b;
+    color: var(--text);
+    padding: 8px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background .15s ease, border .15s ease, color .15s ease;
+  }
+  .chip:hover { background: var(--card-hover); }
+  .chip.active {
+    background: var(--accent);
+    color: #1a1500;
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    display: flex; flex-direction: column;
+    box-shadow: var(--shadow);
+    transition: transform .15s ease, background .15s ease, border .15s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    background: var(--card-hover);
+    border-color: var(--accent-3);
+  }
+  .card header {
+    padding: 0; text-align: left; margin-bottom: 10px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  }
+  .card h3 {
+    margin: 0; font-size: 16px; letter-spacing: .3px;
+  }
+  .tag {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+    padding: 4px 8px; border-radius: 999px;
+    background: #2a2f5e; color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .tag.cinematic { color: #ffd166; border-color: #5a4a1a; background: #2d2510; }
+  .tag.portrait  { color: #ff6b6b; border-color: #5a1f1f; background: #2d1010; }
+  .tag.scene     { color: #6bcbff; border-color: #1f4a5a; background: #10222d; }
+  .tag.fantasy   { color: #b388ff; border-color: #3e2a66; background: #1a1030; }
+  .tag.action    { color: #3ddc97; border-color: #1e5a3f; background: #10291f; }
+
+  .prompt {
+    font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+    font-size: 13px; line-height: 1.55;
+    background: #12152b;
+    border: 1px solid var(--border);
+    padding: 12px;
+    border-radius: 10px;
+    white-space: pre-wrap;
+    color: #d8dcf3;
+    flex: 1;
+  }
+  .card footer {
+    display: flex; gap: 8px; margin-top: 12px;
+  }
+  button.copy {
+    background: linear-gradient(180deg, var(--accent), #e6b800);
+    color: #1a1500;
+    border: none;
+    padding: 9px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+    transition: transform .1s ease, filter .15s ease;
+  }
+  button.copy:hover { filter: brightness(1.08); }
+  button.copy:active { transform: scale(0.97); }
+  button.copy.copied {
+    background: var(--success); color: #0f2819;
+  }
+
+  footer.site {
+    text-align: center; color: var(--muted);
+    font-size: 12px; padding: 20px 16px 40px;
+  }
+
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 20px;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-2);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brick-row" aria-hidden="true">
+    <div class="brick b1"></div>
+    <div class="brick b2"></div>
+    <div class="brick b3"></div>
+    <div class="brick b4"></div>
+    <div class="brick b5"></div>
+  </div>
+  <h1>AFTERLAND — LEGO PROMPT SET</h1>
+  <p class="subtitle">
+    A complete collection of cinematic LEGO-style prompts for AI image generation.
+    Click any card to copy the prompt. Filter by category or search keywords.
+  </p>
+</header>
+
+<main>
+  <div class="toolbar" role="region" aria-label="Search and filters">
+    <input id="search" type="search" placeholder="Search prompts (e.g. forest, warrior, neon)…" />
+    <div class="filters" id="filters">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="cinematic">Cinematic</button>
+      <button class="chip" data-filter="portrait">Portrait</button>
+      <button class="chip" data-filter="scene">Scene</button>
+      <button class="chip" data-filter="fantasy">Fantasy</button>
+      <button class="chip" data-filter="action">Action</button>
+    </div>
+  </div>
+
+  <section class="grid" id="grid"></section>
+</main>
+
+<footer class="site">
+  AFTERLAND · LEGO Prompt Set · Built with bricks &amp; pixels.
+</footer>
+
+<script>
+  const prompts = [
+    {
+      title: "Lone Wanderer at Dusk",
+      tag: "cinematic",
+      text: "LEGO minifigure of a lone wanderer in a tattered cloak, standing on a cliff at dusk, golden hour lighting, cinematic wide shot, volumetric fog, ultra detailed LEGO bricks, 8k, photorealistic render."
+    },
+    {
+      title: "Neon Rooftop Chase",
+      tag: "action",
+      text: "LEGO cyberpunk city rooftop chase scene, two minifigures leaping between neon-lit buildings, rain and reflections, motion blur, dramatic low angle, Blade Runner color palette, photoreal LEGO render."
+    },
+    {
+      title: "Knight of the Ember Keep",
+      tag: "portrait",
+      text: "Close-up portrait of a LEGO knight minifigure with glowing ember-red eyes, ornate dented armor made of LEGO pieces, sparks floating around, dark smoky background, studio rim lighting, hyper detailed."
+    },
+    {
+      title: "Afterland Forest Camp",
+      tag: "scene",
+      text: "LEGO forest camp in the mystical land of Afterland, glowing mushrooms and bioluminescent plants, a small campfire made of translucent orange bricks, twin moons in the sky, magical atmosphere."
+    },
+    {
+      title: "Dragon Over the Cathedral",
+      tag: "fantasy",
+      text: "Massive LEGO dragon breathing fire over a crumbling gothic cathedral, minifigure knights defending on the rooftops, stained glass shattering, embers and ash, epic fantasy composition, wide cinematic framing."
+    },
+    {
+      title: "Mecha Pilot Cockpit",
+      tag: "portrait",
+      text: "LEGO mecha pilot minifigure inside a detailed cockpit, holographic HUD projected around the face, blue and orange rim light, intricate buttons and levers, sci-fi atmosphere, shallow depth of field."
+    },
+    {
+      title: "Underwater Ruins",
+      tag: "scene",
+      text: "LEGO underwater ruins of an ancient civilization, transparent blue water bricks, schools of LEGO fish, beams of god rays piercing through, a diver minifigure exploring, eerie calm, deep sea color grading."
+    },
+    {
+      title: "Samurai on the Bridge",
+      tag: "action",
+      text: "LEGO samurai minifigure mid-slash on a rain-soaked wooden bridge, cherry blossom petals in the wind, lightning in the background, dynamic pose, cinematic slow motion feel, ukiyo-e inspired color palette."
+    },
+    {
+      title: "Desert Caravan",
+      tag: "scene",
+      text: "LEGO caravan crossing an endless desert at sunset, camels and minifigures in flowing robes, long shadows, dunes made from smooth tan bricks, warm orange sky, epic wide establishing shot."
+    },
+    {
+      title: "Witch of the Iron Marsh",
+      tag: "fantasy",
+      text: "LEGO witch minifigure stirring a bubbling cauldron in a haunted marsh, green glowing potion, twisted leafless trees, crows perched on branches, foggy moonlit night, gothic horror mood."
+    },
+    {
+      title: "Space Station Approach",
+      tag: "cinematic",
+      text: "A LEGO spaceship approaching a rotating orbital station, Earth in the background, detailed panels and antennas, lens flare from the sun, dramatic scale, Kubrick-inspired framing, ultra photoreal."
+    },
+    {
+      title: "Afterland Market Day",
+      tag: "scene",
+      text: "Bustling LEGO market in Afterland city, minifigure vendors selling glowing fruit and mechanical trinkets, colorful stall awnings, airships drifting overhead, bright saturated lighting, rich world-building details."
+    },
+    {
+      title: "Detective in the Rain",
+      tag: "portrait",
+      text: "Moody LEGO detective minifigure under a streetlamp, trench coat and fedora, rain streaks across the scene, glowing cigarette tip, wet cobblestone reflections, 1940s noir color grading."
+    },
+    {
+      title: "Siege of Ironhold",
+      tag: "action",
+      text: "Massive LEGO castle siege, catapults flinging flaming bricks, minifigure soldiers charging the gates, arrows in mid-air, dust and smoke, epic wide battle shot, cinematic depth, Lord of the Rings inspired."
+    },
+    {
+      title: "Time Traveler's Study",
+      tag: "fantasy",
+      text: "LEGO time traveler minifigure in a cluttered study filled with maps, clocks, and strange glowing artifacts, swirling blue time portal in the corner, warm candlelight, intricate steampunk details."
+    }
+  ];
+
+  const grid = document.getElementById("grid");
+  const searchInput = document.getElementById("search");
+  const filters = document.getElementById("filters");
+
+  let activeFilter = "all";
+  let query = "";
+
+  function render() {
+    const q = query.trim().toLowerCase();
+    const list = prompts.filter(p => {
+      const matchFilter = activeFilter === "all" || p.tag === activeFilter;
+      const matchQuery = !q ||
+        p.title.toLowerCase().includes(q) ||
+        p.text.toLowerCase().includes(q) ||
+        p.tag.toLowerCase().includes(q);
+      return matchFilter && matchQuery;
+    });
+
+    grid.innerHTML = "";
+    if (list.length === 0) {
+      const empty = document.createElement("div");
+      empty.className = "empty";
+      empty.textContent = "No prompts match your search. Try a different keyword.";
+      grid.appendChild(empty);
+      return;
+    }
+
+    for (const p of list) {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.innerHTML = `
+        <header>
+          <h3></h3>
+          <span class="tag ${p.tag}"></span>
+        </header>
+        <div class="prompt"></div>
+        <footer>
+          <button class="copy" type="button">Copy prompt</button>
+        </footer>
+      `;
+      card.querySelector("h3").textContent = p.title;
+      card.querySelector(".tag").textContent = p.tag;
+      card.querySelector(".prompt").textContent = p.text;
+
+      const btn = card.querySelector(".copy");
+      btn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(p.text);
+          btn.textContent = "Copied!";
+          btn.classList.add("copied");
+          setTimeout(() => {
+            btn.textContent = "Copy prompt";
+            btn.classList.remove("copied");
+          }, 1500);
+        } catch (err) {
+          btn.textContent = "Copy failed";
+          setTimeout(() => { btn.textContent = "Copy prompt"; }, 1500);
+        }
+      });
+
+      grid.appendChild(card);
+    }
+  }
+
+  searchInput.addEventListener("input", e => {
+    query = e.target.value;
+    render();
+  });
+
+  filters.addEventListener("click", e => {
+    const btn = e.target.closest(".chip");
+    if (!btn) return;
+    filters.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    btn.classList.add("active");
+    activeFilter = btn.dataset.filter;
+    render();
+  });
+
+  render();
+</script>
+
+</body>
+</html>
